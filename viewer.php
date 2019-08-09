@@ -14,22 +14,22 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div id="carousel" class="carousel slide" data-ride="carousel" data-interval='<?php echo $_POST['Time']*1000 ?>'>
+            <div id="carousel" class="carousel slide" data-ride="carousel" data-interval='<?php echo $_POST['Time'] * 1000 ?>'>
                 <div class="carousel-inner">
                     <?php
-                        $count=0;
+                        $count = 0;
                         foreach ($_FILES['Imagens']['name'] as $filename) {
-                            $temp='temp/';
-                            $tmp=$_FILES['Imagens']['tmp_name'][$count];
-                            $count=$count + 1;
-                            $temp=$temp.basename($filename);
-                            move_uploaded_file($tmp,$temp);
+                            $temp = 'temp/';
+                            $tmp = $_FILES['Imagens']['tmp_name'][$count];
+                            $count = $count + 1;
+                            $temp = $temp.basename($filename);
+                            move_uploaded_file($tmp, $temp);
                             echo "
                                 <div class='carousel-item'>
                                     <img src='$temp' class='d-block w-100'>
                                 </div>";
-                            $temp='';
-                            $tmp='';
+                            $temp = '';
+                            $tmp = '';
                         }
                     ?>
                 </div>

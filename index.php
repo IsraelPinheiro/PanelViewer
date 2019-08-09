@@ -1,16 +1,16 @@
 <?php
     $files = glob('temp/*'); // get all file names
-    foreach($files as $file){ // iterate files
-        if(is_file($file)){
+    foreach ($files as $file) { // iterate files
+        if (is_file($file)) {
             unlink($file); // delete file
-        }    
+        }
     }
 ?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
-    <?php include('includes/head.php'); ?>
+    <?php include 'includes/head.php'; ?>
     <body>
-        <?php include('includes/header.php'); ?>   
+        <?php include 'includes/header.php'; ?>   
         <section>
             <form id="MainForm" action="viewer.php" method="POST" enctype="multipart/form-data">
                 <div class="row mx-auto align-middle">
@@ -43,6 +43,6 @@
                 </div>
             </form>
         </section>
-        <?php include('includes/footer.php'); ?>
+        <?php include 'includes/footer.php'; ?>
     </body>
 </html>
