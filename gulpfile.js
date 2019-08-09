@@ -41,33 +41,33 @@ function browserSyncReload(done){
     done();
 }
 
-// Clean vendor
+// Clean bin
 function clean(){
-    return del(["./vendor/"]);
+    return del(["./bin/"]);
 }
 
-// Bring third party dependencies from node_modules into vendor directory
+// Bring third party dependencies from node_modules into bin directory
 function modules(){
     //Bootstrap JS
     var bootstrapJS = gulp.src('./node_modules/bootstrap/dist/js/*')
-        .pipe(gulp.dest('./vendor/bootstrap/js'));
+        .pipe(gulp.dest('./bin/bootstrap/js'));
     //Popper.js
     var popperJS = gulp.src('./node_modules/popper.js/dist/umd/*')
-        .pipe(gulp.dest('./vendor/popper.js'));
+        .pipe(gulp.dest('./bin/popper.js'));
     //jQuery Mask Plugin
     var jQueryMaskPlugin = gulp.src('./node_modules/jquery-mask-plugin/src/*')
-        .pipe(gulp.dest('./vendor/jquery-mask-plugin'));
+        .pipe(gulp.dest('./bin/jquery-mask-plugin'));
     //Font Awesome CSS
     var fontAwesomeCSS = gulp.src('./node_modules/@fortawesome/fontawesome-free/css/**/*')
-        .pipe(gulp.dest('./vendor/fontawesome-free/css'));
+        .pipe(gulp.dest('./bin/fontawesome-free/css'));
     //Font Awesome Webfonts
     var fontAwesomeWebfonts = gulp.src('./node_modules/@fortawesome/fontawesome-free/webfonts/**/*')
-        .pipe(gulp.dest('./vendor/fontawesome-free/webfonts'));
+        .pipe(gulp.dest('./bin/fontawesome-free/webfonts'));
     //jQuery
     var jquery = gulp.src([
         './node_modules/jquery/dist/*',
         '!./node_modules/jquery/dist/core.js'
-    ]).pipe(gulp.dest('./vendor/jquery'));
+    ]).pipe(gulp.dest('./bin/jquery'));
     return merge(bootstrapJS, jQueryMaskPlugin, fontAwesomeCSS, fontAwesomeWebfonts,popperJS, jquery);
 }
 
@@ -123,15 +123,15 @@ function watchFiles() {
 }
 
 // Define complex tasks
-const vendor = gulp.series(clean, modules);
-const build = gulp.series(vendor, gulp.parallel(css, js));
+const bin = gulp.series(clean, modules);
+const build = gulp.series(bin, gulp.parallel(css, js));
 const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
 // Export tasks
 exports.css = css;
 exports.js = js;
 exports.clean = clean;
-exports.vendor = vendor;
+exports.bin = bin;
 exports.build = build;
 exports.watch = watch;
 exports.default = build;
